@@ -1,55 +1,48 @@
 #include "minishell.h"
-# define MINISHELL "MINISHELL $> "
 
-void	sig_int_input()
+//環境変数を持ってきて本来の関数がある場所を探して、必要な場所を関数に渡す。
+
+void	output(t_list *lex)
 {
-	ft_putstr_fd("\b\b  \b\n", 2);
-	ft_putstr_fd(MINISHELL, 2);
+	while (lex != NULL)
+	{
+		printf("%s\n", lex->content);
+		lex = lex->next;
+	}
 }
 
-void	sig_quit_input()
+void	free_list(t_list *lex)
 {
-	ft_putstr_fd("\b\b  \b\b", 2);
-}
+	t_list *tmp;
 
-char	*command_input(char *envp[])
-{
-	char	*line;
-	int		ret;
-
-	ret = 0;
-	line = NULL;
-	if (signal(SIGINT, sig_int_input) == SIG_ERR)
+	while (lex != NULL)
 	{
-		ft_putstr_fd(strerror(errno), 2);
-		exit (1);
+		tmp = lex;
+		lex = lex->next;
+		free(tmp->content);
+		free(tmp);
 	}
-	if (signal(SIGQUIT, sig_quit_input) == SIG_ERR)
-	{
-		ft_putstr_fd(strerror(errno), 2);
-		exit (1);
-	}
-	if (get_next_line(0, &line) == 0)
-	{
-		ft_putstr_fd("exit\n", 1);
-		exit (ret);
-	}
-	return (line);
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
+	t_list	*lex_cmd;
+	t_cmd	*cmd;
 
 	if (argc == 1)
 	{
 		while (1)
 		{
-			ft_putstr_fd(MINISHELL, 1);
+			write(1, "MINISHELL $>", 12);
 			line = command_input(envp);
-			ft_putstr_fd(line, 1);
-			ft_putstr_fd("\n", 1);
+			ms_lexer(line, &lex_cmd);
 			free(line);
+			output(lex_cmd);
+			ms_parser(lex_cmd, &cmd);
+			free_list(lex_cmd);
+			line = NULL;
+			write(1, "\n", 1);
 		}
 	}
 }

@@ -35,5 +35,19 @@
 /* tgetent, tgetflag, tgetnum,  tgetstr, tgoto, tputs */
 # include <signal.h>
 /* signals */
+# define MINISHELL "MINISHELL $> "
+
+typedef struct s_cmd
+{
+	char	*command;
+	char	**argv;
+}	t_cmd;
+
+char	*command_input(char *envp[]);
+t_cmd	*command_parse(char *line);
+void	free_cmd(t_cmd **cmd);
+int		ms_issep(char c)
+int		ms_lexer(char *line, t_list **lex_cmd);
+void	ms_echo(char **argv);
 
 #endif /* MINISHELL_H */

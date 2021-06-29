@@ -13,23 +13,32 @@ LIBFLAGS = -L $(LIB_DIR) -lft
 # Source files
 # ****************************************************************************
 
-MAIN_DIR =		main/
+MAIN_DIR	=	main/
 MAIN_FILES	=	main.c \
-					#xxxx.c
-MAIN_SRCS = $(addprefix $(MAIN_DIR), $(MAIN_FILES))
+				#xxxx.c
+MAIN_SRCS	 =	$(addprefix $(MAIN_DIR), $(MAIN_FILES))
 
-# XXXX_DIR =		XXXX/
-# XXXX_FILES =	xxxx.c \
-# 				xxxx.c
-# XXXX_SRCS = $(addprefix $(XXXX_DIR), $(XXXX_FILES))
+INPUT_DIR	=	input/
+INPUT_FILES	=	input.c \
+				parse.c \
+				lexer.c \
+				#xxxx.c
+INPUT_SRCS =	$(addprefix $(INPUT_DIR), $(INPUT_FILES))
 
-# XXXX_DIR =		XXXX/
-# XXXX_FILES =	xxxx.c \
-# 				xxxx.c
-# XXXX_SRCS = $(addprefix $(XXXX_DIR), $(XXXX_FILES))
+ERROR_DIR 	=	error/
+ERROR_FILES	=	free.c \
+				#xxxx.c
+ERROR_SRCS	=	$(addprefix $(ERROR_DIR), $(ERROR_FILES))
+
+ECHO_DIR	=	echo/
+ECHO_FILES	=	main.c \
+				#xxxx.c
+ECHO_SRCS	=	$(addprefix $(ECHO_DIR), $(ECHO_FILES))
 
 SRC_FILES =			$(MAIN_SRCS) \
-					#$(XXXX_SRCS) \
+					$(INPUT_SRCS) \
+					$(ERROR_SRCS) \
+					$(ECHO_SRCS) \
 
 # addprefix
 
@@ -38,8 +47,9 @@ SRC_DIR = srcs/
 OBJ_DIR = objs/
 OBJS = $(SRC_FILES:%.c=$(OBJ_DIR)%.o)
 MAIN_OBJS = $(MAIN_FILES:%.c=$(OBJ_DIR)main/%.o)
-# XXXX_OBJS = $(XXXX_FILES:%.c=$(OBJ_DIR)xxxx/%.o)
-# XXXX_OBJS = $(XXXX_FILES:%.c=$(OBJ_DIR)xxxx/%.o)
+INPUT_OBJS = $(INPUT_FILES:%.c=$(OBJ_DIR)input/%.o)
+ERROR_OBJS = $(ERROR_FILES:%.c=$(OBJ_DIR)error/%.o)
+ECHO_OBJS = $(ECHO_FILES:%.c=$(OBJ_DIR)echo/%.o)
 
 # Recipe
 # ****************************************************************************
@@ -58,8 +68,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)$(MAIN_DIR)
-#	mkdir -p $(OBJ_DIR)$(XXXX_DIR)
-#	mkdir -p $(OBJ_DIR)$(XXXX_DIR)
+	mkdir -p $(OBJ_DIR)$(INPUT_DIR)
+	mkdir -p $(OBJ_DIR)$(ERROR_DIR)
+	mkdir -p $(OBJ_DIR)$(ECHO_DIR)
 
 debug: $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(DEBUG) $(LIBFLAGS) $(OBJS) -o $(NAME)

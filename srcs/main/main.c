@@ -75,7 +75,6 @@ int	main(int argc, char *argv[], char *envp[])
 			free(line);
 			ms_parser(lex_cmd, &cmd);
 			output_cmd(cmd);
-			exit(0);
 			free_list(lex_cmd);
 			free_cmd(cmd);
 			//ms_launcher();

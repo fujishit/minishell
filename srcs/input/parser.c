@@ -63,6 +63,8 @@ t_list	*parse_meta(t_meta **new, t_list *lex)
 		(*new)->meta = REDIRECT_OUT;
 	else if (ft_strcmp ((char *)lex->content, ">>") == 0)
 		(*new)->meta = ADD_REDIRECT_OUT;
+	else if (ft_strcmp((char *)lex->content, "|") == 0)
+		(*new)->meta = PIPE;
 	else
 		(*new)->meta = NO_REDIRECT;
 	return (lex->next);

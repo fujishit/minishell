@@ -42,6 +42,7 @@
 # define HERE_DOCUMENT 12 // <<
 # define REDIRECT_OUT 21 // >
 # define ADD_REDIRECT_OUT 22 // >>
+# define PIPE 31 // |
 
 typedef struct s_meta	t_meta;
 

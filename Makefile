@@ -20,8 +20,9 @@ MAIN_SRCS	 =	$(addprefix $(MAIN_DIR), $(MAIN_FILES))
 
 INPUT_DIR	=	input/
 INPUT_FILES	=	input.c \
-				parse.c \
+				parser.c \
 				lexer.c \
+				separate.c \
 				#xxxx.c
 INPUT_SRCS =	$(addprefix $(INPUT_DIR), $(INPUT_FILES))
 

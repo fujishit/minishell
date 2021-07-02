@@ -1,7 +1,6 @@
 #include "minishell.h"
 
-//引数cが|, <, >であれば1,'\0'なら-1,それ以外なら0が返る関数
-
+//meta文字が見つかるまで(issep関数で0が返ってくる)の文字列をコピーする関数
 static char	*lex_arg(char *line, size_t *i)
 {
 	char	*arg;
@@ -28,6 +27,7 @@ static char	*lex_arg(char *line, size_t *i)
 	return (arg);
 }
 
+//meta文字が見つかったら(issep関数で1が返ってくる)meta文字列をコピーする関数
 static char	*lex_meta(char *line, size_t *i)
 {
 	char	*meta;

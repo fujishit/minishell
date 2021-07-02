@@ -2,25 +2,60 @@
 
 //環境変数を持ってきて本来の関数がある場所を探して、必要な場所を関数に渡す。
 
-void	output(t_list *lex)
+void	output_cmd(t_cmd *cmd)
 {
-	while (lex != NULL)
+	size_t i;
+	t_meta *meta_tmp;
+	t_cmd *cmd_tmp;
+
+	cmd_tmp = cmd;
+	while (cmd_tmp != NULL)
 	{
-		printf("%s\n", lex->content);
-		lex = lex->next;
+		printf("\x1b[34m");
+		printf("command details\n");
+		printf("command: ");
+		fflush(stdout);
+		printf("[%s]\n", cmd_tmp->argv[0]);
+		printf("arguments:");
+		i = 1;
+		printf("[");
+		fflush(stdout);
+		while (i < cmd_tmp->argc)
+		{
+			printf("%s, ", cmd_tmp->argv[i]);
+			fflush(stdout);
+			i++;
+		}
+		if (1 < i)
+			printf("\b\b");
+		printf("]\n");
+		meta_tmp = cmd_tmp->nextmeta;
+		if (meta_tmp == NULL)
+			break ;
+		printf("\x1b[32m");
+		if (meta_tmp->meta != NO_REDIRECT)
+		{
+			if (meta_tmp->meta == REDIRECT_IN)
+				printf("INPUT_REDIRECT \"<\"\n");
+			else if (meta_tmp->meta == HERE_DOCUMENT)
+				printf("HERE_DOCUMENT \"<<\"\n");
+			else if (meta_tmp->meta == REDIRECT_OUT)
+				printf("REDIRECT_OUT \">\"\n");
+			else if (meta_tmp->meta == ADD_REDIRECT_OUT)
+				printf("APPEND_REDIRECT_OUT \">>\"");
+		}
+		cmd_tmp = meta_tmp->nextcmd;
 	}
+	printf("\x1b[39m");
+	fflush(stdout);
 }
 
-void	free_list(t_list *lex)
+void	output_list(t_list *lex)
 {
-	t_list *tmp;
-
 	while (lex != NULL)
 	{
-		tmp = lex;
+		printf("%s\n", (char *)lex->content);
 		lex = lex->next;
-		free(tmp->content);
-		free(tmp);
 	}
 }
 
@@ -38,9 +73,12 @@ int	main(int argc, char *argv[], char *envp[])
 			line = command_input(envp);
 			ms_lexer(line, &lex_cmd);
 			free(line);
-			output(lex_cmd);
 			ms_parser(lex_cmd, &cmd);
+			output_cmd(cmd);
+			exit(0);
 			free_list(lex_cmd);
+			free_cmd(cmd);
+			//ms_launcher();
 			line = NULL;
 			write(1, "\n", 1);
 		}

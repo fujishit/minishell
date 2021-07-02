@@ -37,17 +37,34 @@
 /* signals */
 # define MINISHELL "MINISHELL $> "
 
+# define NO_REDIRECT 0 //
+# define REDIRECT_IN 11 // <
+# define HERE_DOCUMENT 12 // <<
+# define REDIRECT_OUT 21 // >
+# define ADD_REDIRECT_OUT 22 // >>
+
+typedef struct s_meta	t_meta;
+
 typedef struct s_cmd
 {
-	char	*command;
 	char	**argv;
+	t_meta	*nextmeta;
+	size_t	argc;
 }	t_cmd;
+
+typedef struct s_meta
+{
+	int		meta;
+	t_cmd	*nextcmd;
+}	t_meta;
 
 char	*command_input(char *envp[]);
 t_cmd	*command_parse(char *line);
-void	free_cmd(t_cmd **cmd);
-int		ms_issep(char c)
+void	free_cmd(t_cmd *cmd);
+void	free_list(t_list *lex);
+int		ms_issep(char c);
 int		ms_lexer(char *line, t_list **lex_cmd);
+int		ms_parser(t_list *lex, t_cmd **cmd);
 void	ms_echo(char **argv);
 
 #endif /* MINISHELL_H */

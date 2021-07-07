@@ -75,7 +75,6 @@ int	ms_parser(t_list *lex, t_cmd **cmd)
 {
 	t_cmd	*newcmd;
 	t_meta	*newmeta;
-	size_t	i;
 
 	lex = lex->next;
 	if (*cmd == NULL)

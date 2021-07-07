@@ -23,6 +23,7 @@ INPUT_FILES	=	input.c \
 				parser.c \
 				lexer.c \
 				separate.c \
+				expansion.c \
 				#xxxx.c
 INPUT_SRCS =	$(addprefix $(INPUT_DIR), $(INPUT_FILES))
 

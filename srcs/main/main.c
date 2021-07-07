@@ -59,6 +59,7 @@ void	output_list(t_list *lex)
 	}
 }
 
+int	ms_expansion(char **argv, char *envp[]);
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
@@ -74,6 +75,7 @@ int	main(int argc, char *argv[], char *envp[])
 			ms_lexer(line, &lex_cmd);
 			free(line);
 			ms_parser(lex_cmd, &cmd);
+			ms_expansion(cmd->argv, envp);
 			output_cmd(cmd);
 			free_list(lex_cmd);
 			free_cmd(cmd);

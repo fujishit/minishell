@@ -8,6 +8,8 @@ void	output_cmd(t_cmd *cmd)
 	t_meta *meta_tmp;
 	t_cmd *cmd_tmp;
 
+	if (cmd == NULL)
+		return ;
 	cmd_tmp = cmd;
 	while (cmd_tmp != NULL)
 	{
@@ -61,7 +63,9 @@ void	output_list(t_list *lex)
 
 int	launcher(t_cmd *cmd)
 {
-	if (ft_strcmp(cmd->argv[0], "pwd") == 0)
+	if (cmd == NULL)
+		return (1);
+	else if (ft_strcmp(cmd->argv[0], "pwd") == 0)
 		return (pwd());
 	else if (ft_strcmp(cmd->argv[0], "echo") == 0)
 		return (echo(cmd->argc, cmd->argv));
@@ -79,6 +83,9 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		while (1)
 		{
+			line = NULL;
+			lex_cmd = NULL;
+			cmd = NULL;
 			write(1, "MINISHELL $>", 12);
 			line = command_input(envp);
 			lexer(line, &lex_cmd); //分割
@@ -86,10 +93,9 @@ int	main(int argc, char *argv[], char *envp[])
 			parser(lex_cmd, &cmd); //パース
 			free_list(lex_cmd);
 			output_cmd(cmd); //パース結果を出力
-			launcher(cmd); //実行
+			if (launcher(cmd) == 0) //実行
+				write(1, "\n", 1);
 			free_cmd(cmd);
-			line = NULL;
-			write(1, "\n", 1);
 		}
 	}
 }

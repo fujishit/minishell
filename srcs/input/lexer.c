@@ -53,6 +53,8 @@ int	lexer(char *line, t_list **lex_cmd)
 
 	if (line[0] != '\0')
 		*lex_cmd = ft_lstnew(ft_strdup("\0"));
+	if (*lex_cmd == NULL)
+		return (1);
 	i = 1;
 	while (line[i] != '\0')
 	{

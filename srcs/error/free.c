@@ -1,7 +1,5 @@
 #include "minishell.h"
 
-//free後にNULLしとくといいかも
-
 static void	free_argv(char **argv, size_t argc)
 {
 	size_t	i;

@@ -1,13 +1,9 @@
 #include "minishell.h"
 
-int	echo(char **argv)
+int	echo(int argc, char **argv)
 {
 	int	i;
-	int	argc;
 
-	argc = 0;
-	while (argv[i] != NULL)
-		argc++;
 	if (argc != 1)
 	{
 		i = 1;
@@ -20,6 +16,5 @@ int	echo(char **argv)
 			i++;
 		}
 	}
-	write(1, "\n", 1);
 	return (0);
 }

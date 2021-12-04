@@ -48,9 +48,9 @@ typedef struct s_meta	t_meta;
 
 typedef struct s_cmd
 {
+	int		argc;
 	char	**argv;
 	t_meta	*nextmeta;
-	size_t	argc;
 }	t_cmd;
 
 typedef struct s_meta
@@ -66,7 +66,7 @@ void	free_list(t_list *lex);
 int		issep(char c);
 int		lexer(char *line, t_list **lex_cmd);
 int		parser(t_list *lex, t_cmd **cmd);
-int		echo(char **argv);
+int		echo(int argc, char **argv);
 int		pwd();
 
 #endif /* MINISHELL_H */

@@ -59,6 +59,14 @@ void	output_list(t_list *lex)
 	}
 }
 
+int	launcher(t_cmd *cmd)
+{
+	if (ft_strcmp(cmd->argv[0], "pwd") == 0)
+		pwd();
+	else if (ft_strcmp(cmd->argv[0], "echo") == 0)
+		echo(cmd->argc, cmd->argv);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
@@ -75,9 +83,9 @@ int	main(int argc, char *argv[], char *envp[])
 			free(line);
 			parser(lex_cmd, &cmd);
 			output_cmd(cmd);
+			launcher(cmd);
 			free_list(lex_cmd);
 			free_cmd(cmd);
-			// launcher();
 			line = NULL;
 			write(1, "\n", 1);
 		}

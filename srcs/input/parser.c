@@ -7,7 +7,6 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 */
-//リストの最後にたどり着くか、meta文字を見つけるまで回して数を数える関数
 int	parse_argc(t_list *lex)
 {
 	size_t	i;
@@ -23,8 +22,8 @@ int	parse_argc(t_list *lex)
 
 t_list	*parse_argv(t_cmd **new, t_list *lex)
 {
-	size_t	i;
-	size_t	argc;
+	int	i;
+	int	argc;
 
 	if (lex == NULL)
 		return (NULL);

@@ -74,11 +74,8 @@ int	parser(t_list *lex, t_cmd **cmd)
 {
 	t_cmd	*newcmd;
 	t_meta	*newmeta;
-	size_t	i;
 
 	lex = lex->next;
-	if (*cmd == NULL)
-		return (-1);
 	lex = parse_argv(&newcmd, lex);
 	*cmd = newcmd;
 	while (lex != NULL)

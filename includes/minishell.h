@@ -69,4 +69,6 @@ int		parser(t_list *lex, t_cmd **cmd);
 int		echo(int argc, char **argv);
 int		pwd();
 
+void	ft_exit(t_cmd *cmd);
+
 #endif /* MINISHELL_H */

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	ms_echo(char **argv)
+void	echo(char **argv)
 {
 	int	i;
 	int	argc;

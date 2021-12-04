@@ -63,9 +63,10 @@ char	*command_input(char *envp[]);
 t_cmd	*command_parse(char *line);
 void	free_cmd(t_cmd *cmd);
 void	free_list(t_list *lex);
-int		ms_issep(char c);
-int		ms_lexer(char *line, t_list **lex_cmd);
-int		ms_parser(t_list *lex, t_cmd **cmd);
-void	ms_echo(char **argv);
+int		issep(char c);
+int		lexer(char *line, t_list **lex_cmd);
+int		parser(t_list *lex, t_cmd **cmd);
+int		echo(char **argv);
+int		pwd();
 
 #endif /* MINISHELL_H */

@@ -71,13 +71,13 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			write(1, "MINISHELL $>", 12);
 			line = command_input(envp);
-			ms_lexer(line, &lex_cmd);
+			lexer(line, &lex_cmd);
 			free(line);
-			ms_parser(lex_cmd, &cmd);
+			parser(lex_cmd, &cmd);
 			output_cmd(cmd);
 			free_list(lex_cmd);
 			free_cmd(cmd);
-			//ms_launcher();
+			// launcher();
 			line = NULL;
 			write(1, "\n", 1);
 		}

@@ -13,7 +13,7 @@ int	parse_argc(t_list *lex)
 	size_t	i;
 
 	i = 0;
-	while (lex != NULL && ms_issep((char)((char *)lex->content)[0]) == 0)
+	while (lex != NULL && issep((char)((char *)lex->content)[0]) == 0)
 	{
 		lex = lex->next;
 		i++;
@@ -71,7 +71,7 @@ t_list	*parse_meta(t_meta **new, t_list *lex)
 }
 
 //t_cmd型に情報を格納する関数
-int	ms_parser(t_list *lex, t_cmd **cmd)
+int	parser(t_list *lex, t_cmd **cmd)
 {
 	t_cmd	*newcmd;
 	t_meta	*newmeta;

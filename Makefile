@@ -41,11 +41,17 @@ PWD_FILES	=	main.c \
 				#xxxx.c
 PWD_SRCS	=	$(addprefix $(PWD_DIR), $(PWD_FILES))
 
+EXIT_DIR	=	exit/
+EXIT_FILES	=	main.c \
+				#xxxx.c
+EXIT_SRCS	=	$(addprefix $(EXIT_DIR), $(EXIT_FILES))
+
 SRC_FILES =			$(MAIN_SRCS) \
 					$(INPUT_SRCS) \
 					$(ERROR_SRCS) \
 					$(ECHO_SRCS) \
 					$(PWD_SRCS) \
+					$(EXIT_SRCS) \
 
 # addprefix
 
@@ -56,8 +62,10 @@ OBJS = $(SRC_FILES:%.c=$(OBJ_DIR)%.o)
 MAIN_OBJS = $(MAIN_FILES:%.c=$(OBJ_DIR)main/%.o)
 INPUT_OBJS = $(INPUT_FILES:%.c=$(OBJ_DIR)input/%.o)
 ERROR_OBJS = $(ERROR_FILES:%.c=$(OBJ_DIR)error/%.o)
+
 ECHO_OBJS = $(ECHO_FILES:%.c=$(OBJ_DIR)echo/%.o)
 PWD_OBJS = $(PWD_FILES:%.c=$(OBJ_DIR)pwd/%.o)
+EXIT_OBJS = $(EXIT_FILES:%.c=$(OBJ_DIR)exit/%.o)
 
 # Recipe
 # ****************************************************************************
@@ -80,6 +88,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(ERROR_DIR)
 	mkdir -p $(OBJ_DIR)$(ECHO_DIR)
 	mkdir -p $(OBJ_DIR)$(PWD_DIR)
+	mkdir -p $(OBJ_DIR)$(EXIT_DIR)
 
 debug: $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(DEBUG) $(LIBFLAGS) $(OBJS) -o $(NAME)

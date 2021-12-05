@@ -41,6 +41,11 @@ PWD_FILES	=	main.c \
 				#xxxx.c
 PWD_SRCS	=	$(addprefix $(PWD_DIR), $(PWD_FILES))
 
+ENV_DIR		=	env/
+ENV_FILES	=	main.c \
+				#xxx.c
+ENV_SRCS	=	$(addprefix $(ENV_DIR), $(ENV_FILES))
+
 EXIT_DIR	=	exit/
 EXIT_FILES	=	main.c \
 				#xxxx.c
@@ -51,6 +56,7 @@ SRC_FILES =			$(MAIN_SRCS) \
 					$(ERROR_SRCS) \
 					$(ECHO_SRCS) \
 					$(PWD_SRCS) \
+					$(ENV_SRCS) \
 					$(EXIT_SRCS) \
 
 # addprefix
@@ -65,6 +71,7 @@ ERROR_OBJS = $(ERROR_FILES:%.c=$(OBJ_DIR)error/%.o)
 
 ECHO_OBJS = $(ECHO_FILES:%.c=$(OBJ_DIR)echo/%.o)
 PWD_OBJS = $(PWD_FILES:%.c=$(OBJ_DIR)pwd/%.o)
+ENV_OBJS = $(ENV_FILES:%.c=$(OBJ_DIR)env/%.o)
 EXIT_OBJS = $(EXIT_FILES:%.c=$(OBJ_DIR)exit/%.o)
 
 # Recipe
@@ -88,6 +95,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(ERROR_DIR)
 	mkdir -p $(OBJ_DIR)$(ECHO_DIR)
 	mkdir -p $(OBJ_DIR)$(PWD_DIR)
+	mkdir -p $(OBJ_DIR)$(ENV_DIR)
 	mkdir -p $(OBJ_DIR)$(EXIT_DIR)
 
 debug: $(LIBFT) $(OBJS)

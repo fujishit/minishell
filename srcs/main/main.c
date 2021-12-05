@@ -4,9 +4,9 @@
 
 void	output_cmd(t_cmd *cmd)
 {
-	size_t i;
-	t_meta *meta_tmp;
-	t_cmd *cmd_tmp;
+	size_t i = 0;
+	t_meta *meta_tmp = NULL;
+	t_cmd *cmd_tmp = NULL;
 
 	if (cmd == NULL)
 		return ;
@@ -90,9 +90,12 @@ int	main(int argc, char *argv[], char *envp[])
 			line = command_input(envp);
 			lexer(line, &lex_cmd); //分割
 			free(line);
+			// output_list(lex_cmd);
 			parser(lex_cmd, &cmd); //パース
 			free_list(lex_cmd);
 			output_cmd(cmd); //パース結果を出力
+			free_cmd(cmd);
+			exit(0);
 			if (launcher(cmd) == 0) //実行
 				write(1, "\n", 1);
 			free_cmd(cmd);

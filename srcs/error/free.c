@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void	free_argv(char **argv, size_t argc)
+static void	free_argv(int argc, char **argv)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ void	free_cmd(t_cmd *cmd)
 	while (cmd_tmp != NULL)
 	{
 		meta_tmp = cmd_tmp->nextmeta;
-		free_argv(cmd_tmp->argv, cmd_tmp->argc);
+		free_argv(cmd_tmp->argc, cmd_tmp->argv);
 		free(cmd_tmp);
 		cmd_tmp = NULL;
 		if (meta_tmp == NULL)
@@ -35,6 +35,8 @@ void	free_cmd(t_cmd *cmd)
 	}
 }
 
+//parseで使う都合で、contentをfreeしてはいけない。
+//strdupでcontentをとってきたらいいというとこでもあるから、その辺は後々
 void	free_list(t_list *lex)
 {
 	t_list	*tmp;
@@ -44,6 +46,5 @@ void	free_list(t_list *lex)
 		tmp = lex;
 		lex = lex->next;
 		free(tmp);
-		tmp = NULL;
 	}
 }

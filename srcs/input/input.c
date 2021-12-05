@@ -35,6 +35,7 @@ char	*command_input(char *envp[])
 
 	ret = 0;
 	line = NULL;
+	trim_line = NULL;
 	signals();
 	if (get_next_line(0, &line) == 0)
 	{

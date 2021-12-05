@@ -61,14 +61,22 @@ void	output_list(t_list *lex)
 	}
 }
 
-int	launcher(t_cmd *cmd)
+static int	launcher(t_cmd *cmd, char *envp[])
 {
 	if (cmd == NULL)
 		return (1);
-	else if (ft_strcmp(cmd->argv[0], "pwd") == 0)
-		return (pwd());
 	else if (ft_strcmp(cmd->argv[0], "echo") == 0)
 		return (echo(cmd->argc, cmd->argv));
+	// else if (ft_strcmp(cmd->argv[0], "cd") == 0)
+	// 	return (cd(cmd->argc, cmd->argv));
+	else if (ft_strcmp(cmd->argv[0], "pwd") == 0)
+		return (pwd());
+	// else if (ft_strcmp(cmd->argv[0], "export") == 0)
+		// return (export());
+	// else if (ft_strcmp(cmd->argv[0], "unset") == 0)
+		// return (unset());
+	else if (ft_strcmp(cmd->argv[0], "env") == 0)
+		return (env(envp));
 	else if (ft_strcmp(cmd->argv[0], "exit") == 0)
 		ft_exit(cmd);
 }
@@ -94,7 +102,7 @@ int	main(int argc, char *argv[], char *envp[])
 			parser(lex_cmd, &cmd); //パース
 			free_list(lex_cmd);
 			output_cmd(cmd); //パース結果を出力
-			launcher(cmd); //実行
+			launcher(cmd, envp); //実行
 			free_cmd(cmd);
 		}
 	}

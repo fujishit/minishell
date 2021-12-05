@@ -72,12 +72,12 @@ t_list	*parse_meta(t_meta **new, t_list *lex)
 //t_cmd型に情報を格納する関数
 int	parser(t_list *lex, t_cmd **cmd)
 {
+	t_list	*tmp;
 	t_cmd	*newcmd;
 	t_meta	*newmeta;
 
 	if (lex == NULL)
 		return (1);
-	lex = lex->next;
 	lex = parse_argv(&newcmd, lex);
 	*cmd = newcmd;
 	while (lex != NULL)

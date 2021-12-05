@@ -3,7 +3,7 @@
 
 typedef struct s_option
 {
-	int n;
+	int	n;
 }	t_option;
 
 #endif

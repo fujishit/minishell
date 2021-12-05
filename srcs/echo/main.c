@@ -1,9 +1,9 @@
 #include "minishell.h"
 #include "echo.h"
 
-static t_option	init_option()
+static t_option	init_option(void)
 {
-	t_option opt;
+	t_option	opt;
 
 	opt.n = 0;
 }
@@ -23,8 +23,8 @@ static int	check_option(t_option *opt, char *argv)
 
 int	echo(int argc, char **argv)
 {
-	int	i;
-	t_option opt;
+	int			i;
+	t_option	opt;
 
 	i = 1;
 	opt = init_option();

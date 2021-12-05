@@ -51,8 +51,11 @@ int	lexer(char *line, t_list **lex_cmd)
 	size_t	i;
 	t_list	*new;
 
-	i = 0;
-	*lex_cmd = ft_lstnew(ft_strdup("\0"));
+	if (line[0] != '\0')
+		*lex_cmd = ft_lstnew(ft_strdup("\0"));
+	if (*lex_cmd == NULL)
+		return (1);
+	i = 1;
 	while (line[i] != '\0')
 	{
 		while (issep(line[i]) == 0)
@@ -60,12 +63,12 @@ int	lexer(char *line, t_list **lex_cmd)
 			new = ft_lstnew(lex_arg(line, &i));
 			ft_lstadd_back(lex_cmd, new);
 			if (new == NULL || new->content == NULL)
-				return (-1);
+				return (1);
 		}
 		new = ft_lstnew(lex_meta(line, &i));
 		ft_lstadd_back(lex_cmd, new);
 		if (new == NULL || new->content == NULL)
-			return (-1);
+			return (1);
 	}
 	return (0);
 }

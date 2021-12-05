@@ -48,7 +48,7 @@ t_list	*parse_argv(t_cmd **new, t_list *lex)
 
 t_list	*parse_meta(t_meta **new, t_list *lex)
 {
-	if (lex == NULL || lex->content == NULL)
+	if (lex->content == NULL)
 		return (NULL);
 	*new = (t_meta *)malloc((size_t) sizeof(t_meta) * 1);
 	if (*new == NULL)
@@ -75,6 +75,8 @@ int	parser(t_list *lex, t_cmd **cmd)
 	t_cmd	*newcmd;
 	t_meta	*newmeta;
 
+	if (lex == NULL)
+		return (1);
 	lex = lex->next;
 	lex = parse_argv(&newcmd, lex);
 	*cmd = newcmd;

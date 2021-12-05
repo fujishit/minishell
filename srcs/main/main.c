@@ -94,8 +94,6 @@ int	main(int argc, char *argv[], char *envp[])
 			parser(lex_cmd, &cmd); //パース
 			free_list(lex_cmd);
 			output_cmd(cmd); //パース結果を出力
-			free_cmd(cmd);
-			exit(0);
 			if (launcher(cmd) == 0) //実行
 				write(1, "\n", 1);
 			free_cmd(cmd);

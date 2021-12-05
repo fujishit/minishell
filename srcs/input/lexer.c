@@ -55,7 +55,7 @@ int	lexer(char *line, t_list **lex_cmd)
 		*lex_cmd = ft_lstnew(ft_strdup("\0"));
 	if (*lex_cmd == NULL)
 		return (1);
-	i = 1;
+	i = 0;
 	while (line[i] != '\0')
 	{
 		while (issep(line[i]) == 0)

@@ -67,8 +67,8 @@ static int	launcher(t_cmd *cmd, char *envp[])
 		return (1);
 	else if (ft_strcmp(cmd->argv[0], "echo") == 0)
 		return (echo(cmd->argc, cmd->argv));
-	// else if (ft_strcmp(cmd->argv[0], "cd") == 0)
-	// 	return (cd(cmd->argc, cmd->argv));
+	else if (ft_strcmp(cmd->argv[0], "cd") == 0)
+		return (cd(cmd->argc, cmd->argv, envp));
 	else if (ft_strcmp(cmd->argv[0], "pwd") == 0)
 		return (pwd());
 	// else if (ft_strcmp(cmd->argv[0], "export") == 0)
@@ -79,6 +79,17 @@ static int	launcher(t_cmd *cmd, char *envp[])
 		return (env(envp));
 	else if (ft_strcmp(cmd->argv[0], "exit") == 0)
 		ft_exit(cmd);
+}
+
+static int	terminal_out()
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	write(1, "minishell: ", 11);
+	write(1, pwd, ft_strlen(pwd));
+	write(1, " $> ", 4);
+	return (0);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -94,7 +105,8 @@ int	main(int argc, char *argv[], char *envp[])
 			line = NULL;
 			lex_cmd = NULL;
 			cmd = NULL;
-			write(1, "MINISHELL $>", 12);
+			// write(1, "MINISHELL $>", 12);
+			terminal_out();
 			line = command_input(envp);
 			lexer(line, &lex_cmd); //分割
 			free(line);

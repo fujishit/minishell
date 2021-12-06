@@ -30,15 +30,15 @@ int	echo(int argc, char **argv)
 	opt = init_option();
 	while (check_option(&opt, argv[i]) == 1)
 		i++;
-	write(1, argv[i], ft_strlen(argv[i]));
+	printf("%s", argv[i]);
 	i++;
 	while (i < argc)
 	{
-		write(1, " ", 1);
-		write(1, argv[i], ft_strlen(argv[i]));
+		printf(" ");
+		printf("%s", argv[i]);
 		i++;
 	}
 	if (opt.n != 1)
-		write(1, "\n", 1);
+		printf("\n");
 	return (0);
 }

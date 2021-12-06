@@ -31,10 +31,17 @@ ERROR_FILES	=	free.c \
 				#xxxx.c
 ERROR_SRCS	=	$(addprefix $(ERROR_DIR), $(ERROR_FILES))
 
+
+# build-in
 ECHO_DIR	=	echo/
 ECHO_FILES	=	main.c \
 				#xxxx.c
 ECHO_SRCS	=	$(addprefix $(ECHO_DIR), $(ECHO_FILES))
+
+CD_DIR		=	cd/
+CD_FILES	=	main.c \
+				#xxxx.c
+CD_SRCS		=	$(addprefix $(CD_DIR), $(CD_FILES))
 
 PWD_DIR		=	pwd/
 PWD_FILES	=	main.c \
@@ -55,6 +62,7 @@ SRC_FILES =			$(MAIN_SRCS) \
 					$(INPUT_SRCS) \
 					$(ERROR_SRCS) \
 					$(ECHO_SRCS) \
+					$(CD_SRCS) \
 					$(PWD_SRCS) \
 					$(ENV_SRCS) \
 					$(EXIT_SRCS) \
@@ -70,6 +78,7 @@ INPUT_OBJS = $(INPUT_FILES:%.c=$(OBJ_DIR)input/%.o)
 ERROR_OBJS = $(ERROR_FILES:%.c=$(OBJ_DIR)error/%.o)
 
 ECHO_OBJS = $(ECHO_FILES:%.c=$(OBJ_DIR)echo/%.o)
+CD_OBJS = $(CD_FILES:%.c=$(OBJ_DIR)cd/%.o)
 PWD_OBJS = $(PWD_FILES:%.c=$(OBJ_DIR)pwd/%.o)
 ENV_OBJS = $(ENV_FILES:%.c=$(OBJ_DIR)env/%.o)
 EXIT_OBJS = $(EXIT_FILES:%.c=$(OBJ_DIR)exit/%.o)
@@ -94,6 +103,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(INPUT_DIR)
 	mkdir -p $(OBJ_DIR)$(ERROR_DIR)
 	mkdir -p $(OBJ_DIR)$(ECHO_DIR)
+	mkdir -p $(OBJ_DIR)$(CD_DIR)
 	mkdir -p $(OBJ_DIR)$(PWD_DIR)
 	mkdir -p $(OBJ_DIR)$(ENV_DIR)
 	mkdir -p $(OBJ_DIR)$(EXIT_DIR)

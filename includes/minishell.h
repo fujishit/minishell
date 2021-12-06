@@ -67,6 +67,7 @@ int		issep(char c);
 int		lexer(char *line, t_list **lex_cmd);
 int		parser(t_list *lex, t_cmd **cmd);
 int		echo(int argc, char **argv);
+int		cd(int argc, char **argv, char *envp[]);
 int		pwd();
 int		env(char *envp[]);
 
